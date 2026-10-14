@@ -3,38 +3,30 @@
 [ext_resource type="Script" uid="uid://c5qxu04d7pxux" path="res://scripts/bird.gd" id="1_3po83"]
 [ext_resource type="Texture2D" uid="uid://cnue7ivmxdnmc" path="res://assets/sprites/bird narrow.png" id="1_kqhkv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dgu7f"]
-radius = 13.038404
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgx8s"]
+size = Vector2(10, 10)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g1gon"]
-radius = 3475.0369
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gti77"]
-radius = 202.06187
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6m1s"]
+size = Vector2(19, 19)
 
 [node name="Bird" type="Area2D" unique_id=919142630]
 script = ExtResource("1_3po83")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=212283237]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_kqhkv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=31946501]
-shape = SubResource("CircleShape2D_dgu7f")
+[node name="Body" type="CollisionShape2D" parent="." unique_id=1819143844]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_jgx8s")
 
-[node name="Vision" type="Area2D" parent="." unique_id=55539347]
+[node name="Vision" type="Area2D" parent="." unique_id=251116764]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" unique_id=817460287]
-shape = SubResource("CircleShape2D_g1gon")
-debug_color = Color(0.92156863, 0, 0.69803923, 0.043137256)
+[node name="Vision" type="CollisionShape2D" parent="Vision" unique_id=1012572633]
+position = Vector2(25, 0)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_n6m1s")
 
-[node name="DangerClose" type="Area2D" parent="." unique_id=1287420332]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DangerClose" unique_id=1712691960]
-shape = SubResource("CircleShape2D_gti77")
-debug_color = Color(0.59607846, 0.54509807, 0, 0.27058825)
-
-[connection signal="area_entered" from="Vision" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Vision" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]
+[connection signal="area_exited" from="Vision" to="." method="_on_vision_area_exited"]
